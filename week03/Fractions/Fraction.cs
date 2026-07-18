@@ -1,3 +1,4 @@
+// Gerardo Guzman - 2026 - CES
 using System;
 
 public class Fraction
