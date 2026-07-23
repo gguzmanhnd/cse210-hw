@@ -1,4 +1,4 @@
-using System
+using System;
 using System.Collections.Generic;
 
 public class Video
@@ -13,7 +13,7 @@ public class Video
         Title = title;
         Author = author;
         LengthInSeconds = lengthInSeconds;
-       
+    
     }
 
     public void AddComment(Comment comment)
