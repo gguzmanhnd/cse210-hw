@@ -1,10 +1,16 @@
 using System;
-namespace lybrary_demo
+namespace library_demo
 {
     public class Book
     {
-    private string _title = "";
-    private string _author= "";
+    protected string _title = "";
+    protected string _author= "";
+
+    public Book()
+    {
+        _title = "Anonymous";
+        _author = "Unknown";
+    }
     
     public string GetAuthor()
     {
@@ -28,7 +34,7 @@ namespace lybrary_demo
 
     public string GetBookInfo()
     {
-        return $"Title: {_title}, Author: {_author}";
+        return $" {_title} by {_author}";
     }
 
     }
