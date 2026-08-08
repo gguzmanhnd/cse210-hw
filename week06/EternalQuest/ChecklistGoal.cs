@@ -1,40 +1,44 @@
-public class ChecklistGoal : Goal
+namespace EternalQuest
 {
-    private int _amountCompleted;
-    private int _target;
+    public class ChecklistGoal : Goal
+    {
+        private int _amountCompleted;
+        private int _target;
         private int _bonus;
 
-
-    public ChecklistGoal(string name, string description, int points, int target, int bonus) : base(name, description, points)
-    {
-        _target = target;
-        _amountCompleted = 0;
-        _bonus = bonus;
-    }
-
-    public override int RecordEvent()
-    {
-        _amountCompleted++;
-        if (_amountCompleted >= _target)
+        public ChecklistGoal(string name, string description, int points, int target, int bonus, int amountCompleted = 0) 
+            : base(name, description, points)
         {
-            return _points + _bonus;
+            _target = target;
+            _bonus = bonus;
+            _amountCompleted = amountCompleted;
         }
-        else
+
+        public override int RecordEvent()
         {
-            return _points;
+            if (_amountCompleted < _target)
+            {
+                _amountCompleted++;
+                if (_amountCompleted == _target)
+                {
+                    return _points + _bonus; 
+                }
+                return _points;
+            }
+            return 0;
         }
-    }
 
-    public override bool IsComplete() => _amountCompleted >= _target;
-    
-    public override string GetDetailsString()
-    {
-        return $"{base.GetDetailsString()} -- Currently completed: {_amountCompleted}/{_target}";
-    }
+        public override bool IsComplete() => _amountCompleted >= _target;
 
-    public override string GetStringRepresentation()
-    {
-        return $"ChecklistGoal:{_shortName},{_description},{_points},{_bonus},{_target},{_amountCompleted}";
+        public override string GetDetailsString()
+        {
+            string statusSymbol = IsComplete() ? "[X]" : "[ ]";
+            return $"{statusSymbol} {_shortName} ({_description}) -- Currently completed: {_amountCompleted}/{_target}";
+        }
+
+        public override string GetStringRepresentation()
+        {
+            return $"ChecklistGoal:{_shortName}|{_description}|{_points}|{_bonus}|{_target}|{_amountCompleted}";
+        }
     }
 }
-    
